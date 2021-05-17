@@ -6,17 +6,29 @@
 #include <string.h>
 #include <stdlib.h> 
 
+typedef struct s_stack
+{
+    int *stackA;
+    int *stackB;
+    int init_size;
+    int sizeB;
+    int sizeA;
+} t_stack;
+
 
 /* comand functions */
 
-void sa(int *stackA); //swap the top two numbers in a stack A
-void sb(int *stackB); //swap the top two numbers in a stack A
-void ss(int *stackA, int *stackB); //swap the top two numbers in a stack A and B
-void ra(int *stackA); //swap the top to the botton stack A
-void rb(int *stackB); //swap the top to the botton stack B
-void rr(int *stackA, int *stackB); // swap the top to the botton stack A and B
-void rra(int *stackA); // swap the botton to the top stack A
-void rrb(int *stackB); // swap the botton to the top stack B
-void rrr(int *stackA, int *stackB); // swap the botton to the top stack A and B
-int sizeof_array(int *array);
+void sa(t_stack *stackA); //swap the top two numbers in a stack A
+void sb(t_stack *stackB); //swap the top two numbers in a stack A
+void ss(t_stack *stackA); //swap the top two numbers in a stack A and B
+void ra(t_stack *stackA); //swap the top to the botton stack A
+void rb(t_stack *stackB); //swap the top to the botton stack B
+void rr(t_stack *stackA); // swap the top to the botton stack A and B
+void rra(t_stack *stackA); // swap the botton to the top stack A
+void rrb(t_stack *stackB); // swap the botton to the top stack B
+void rrr(t_stack *stackA); // swap the botton to the top stack A and B
+void pb(t_stack *stack); // send the top of B to A
+void pa(t_stack *stack); // send the top of A to B
+int find_botton(t_stack *stack);
+
 #endif
