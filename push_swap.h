@@ -10,9 +10,7 @@ typedef struct s_stack
 {
     int *stackA;
     int *stackB;
-    int init_size;
-    int sizeB;
-    int sizeA;
+    int size;
 } t_stack;
 
 
@@ -30,5 +28,6 @@ void rrr(t_stack *stackA); // swap the botton to the top stack A and B
 void pb(t_stack *stack); // send the top of B to A
 void pa(t_stack *stack); // send the top of A to B
 int find_botton(t_stack *stack);
+int find_top_b(t_stack *stack);
 
 #endif

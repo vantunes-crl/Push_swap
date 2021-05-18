@@ -3,15 +3,17 @@
 void sa(t_stack *stack) //swap the top two numbers in a stack A
 {
     int temp = stack->stackA[0];
+    if (stack->stackA[1] == 0)
+        return ;
     stack->stackA[0] = stack->stackA[1];
     stack->stackA[1] = temp;
 }
 
 void sb(t_stack *stack) //swap the top two numbers in a stack B
 {
-    int temp = stack->stackB[0];
-    stack->stackB[0] = stack->stackB[1];
-    stack->stackB[1] = temp;
+    int temp = stack->stackB[find_top_b(stack) + 1];
+    stack->stackB[find_top_b(stack) + 1] = stack->stackB[find_top_b(stack) + 2];
+    stack->stackB[find_top_b(stack) + 2] = temp;
 }
 
 void ss(t_stack *stack) //swap the top two numbers in a stack A and B
@@ -41,10 +43,10 @@ void rra(t_stack *stack) //swap the botton to the top stack A
 
 void rrb(t_stack *stack) //swap the botton to the top stack B
 {
-    int x = stack->stackB[4], i;
-    for (i = 4; i > 0; i--)
-        stack->stackB[i] = stack->stackB[i-1];
-    stack->stackB[stack->init_size + 1] = x;
+    int x = stack->stackB[stack->size], i;
+    for (i = stack->size; i > 0; i--)
+        stack->stackB[i] = stack->stackB[i - 1];
+    stack->stackB[find_top_b(stack)] = x;
 }
 
 void rrr(t_stack *stack) // swap the top to the botton stack A and B
@@ -64,17 +66,30 @@ void ra(t_stack *stack) // swap the top to the botton stack A
 
 void rb(t_stack *stack) // swap the botton to the top stack B
 {
-   int botton = stack->init_size + 1;
-    int x = stack->stackB[4], i;
-    for (i = 4; i >= 0; i--)
-        stack->stackB[i] = stack->stackB[i - 1];
-    stack->stackB[botton] = x;
+    int top = stack->stackB[find_top_b(stack) + 1];
+    int botton = stack->stackB[stack->size];
+    int i = find_top_b(stack) + 1;
+    while (i <= stack->size)
+    {
+        stack->stackB[i] = stack->stackB[i + 1];
+        i++;
+    }
+    stack->stackB[stack->size] = top;
 }
 
 void rr(t_stack *stack) // swap the botton to the top stack A and B
 {
     ra(stack);
     rb(stack);
+}
+
+int find_top_b(t_stack *stack)
+{
+    int i = 0;
+    i = stack->size;
+    while (stack->stackB[i] != 0)
+        i--;
+    return (i);
 }
 
 void pb(t_stack *stack)
@@ -85,21 +100,21 @@ void pb(t_stack *stack)
     if (save == 0)
         return ;
     i = 0;
-    while (i < stack->sizeA - 1)
+    while (i <= stack->size)
     {
         stack->stackA[i] = stack->stackA[i + 1];
         i++;
     }
-    stack->stackB[stack->init_size--] = save;
+    stack->stackB[find_top_b(stack)] = save;
 }
 
 void pa(t_stack *stack)
 {
-    int save = stack->stackB[stack->init_size + 1];
+    int save = stack->stackB[find_top_b(stack) + 1];
     if (save == 0)
         return ;
-    stack->stackB[stack->init_size + 1] = 0;
-    int i = stack->sizeA;
+    stack->stackB[find_top_b(stack) + 1] = 0;
+    int i = stack->size;
     while (i)
     {
         stack->stackA[i] = stack->stackA[i - 1];

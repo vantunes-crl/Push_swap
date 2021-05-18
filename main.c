@@ -4,16 +4,22 @@ int main()
 {   
     t_stack stack;
     int i;
-    stack.sizeA = 6;
-    stack.sizeB = 6;
-    stack.init_size = 4;
-    stack.stackA = calloc(stack.sizeA, sizeof(int));
-    stack.stackB = calloc(stack.sizeB, sizeof(int));
+
+    stack.size = 5;
+    stack.stackA = calloc(stack.size + 1, sizeof(int));
+    stack.stackB = calloc(stack.size + 1, sizeof(int));
     i = -1;
-    while (++i < 5)
+    while (i <= stack.size)
+    {
         stack.stackA[i] = i + 1;
+        i++;
+    }
     i = 0;
-    while (i < stack.sizeA - 1 || i < stack.sizeB - 1)
+    pb(&stack);
+    pb(&stack);
+    pb(&stack);
+    rb(&stack);
+    while (i <= stack.size)
     {
         if (stack.stackA[i] == 0)
             printf(" ");
