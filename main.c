@@ -1,24 +1,24 @@
 #include "push_swap.h"
 
-int main()
+int main(int argc, char **argv)
 {   
     t_stack stack;
     int i;
+    int j = 1;
 
-    stack.size = 5;
+    stack.size = argc - 2;
     stack.stackA = calloc(stack.size + 1, sizeof(int));
     stack.stackB = calloc(stack.size + 1, sizeof(int));
-    i = -1;
+    i = 0;
     while (i <= stack.size)
     {
-        stack.stackA[i] = i + 1;
+        if (!argv[j])
+            break;
+        stack.stackA[i] = atoi(strdup(argv[j]));
+        j++;
         i++;
     }
     i = 0;
-    pb(&stack);
-    pb(&stack);
-    pb(&stack);
-    rb(&stack);
     while (i <= stack.size)
     {
         if (stack.stackA[i] == 0)
