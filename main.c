@@ -113,7 +113,7 @@ int main(int argc, char **argv)
     int i;
     int j = 1;
 
-    stack.cmd = "Used ";
+    stack.cmd = " ";
     stack.size = argc - 2;
     stack.stackA = calloc(stack.size + 1, sizeof(int));
     stack.stackB = calloc(stack.size + 1, sizeof(int));
@@ -124,20 +124,24 @@ int main(int argc, char **argv)
         j++;
         i++;
     }
-    i = 0;
-    while (i <= stack.size)
-    {
-        move_top(&stack);
-        pb(&stack);
-        i++;
-    }
-    i = 0;
-    while (i++ <= stack.size)
-        pa(&stack);
-    i = 0;
     if (argc == 4)
         organize_3(&stack);
-    printf("\033[1;34m%s\n", stack.cmd);
+    else
+    {
+        move_top(&stack);
+        i = 0;
+        while (i < stack.size)
+        {
+            move_top(&stack);
+            pb(&stack);
+            i++;
+        }
+        i = 0;
+        while (i++ < stack.size)
+            pa(&stack);
+    }
+    i = 0;
+    printf("\033[1;36mUsed\033[1;34m%s\n\n", stack.cmd);
     while (i <= stack.size)
     {
         if (stack.stackA[i] == 0)
