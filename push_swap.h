@@ -11,6 +11,7 @@ typedef struct s_stack
     int *stackA;
     int *stackB;
     int size;
+    char *cmd;
 } t_stack;
 
 
@@ -27,9 +28,9 @@ void rrb(t_stack *stackB); // swap the botton to the top stack B
 void rrr(t_stack *stackA); // swap the botton to the top stack A and B
 void pb(t_stack *stack); // send the top of B to A
 void pa(t_stack *stack); // send the top of A to B
-void organize_3_a(t_stack *stack);
+void organize_3(t_stack *stack);
 int find_botton(t_stack *stack);
 int find_top_b(t_stack *stack);
-void organize_3_b(t_stack *stack);
+char	*ft_strjoin(char const *s1, char const *s2);
 
 #endif

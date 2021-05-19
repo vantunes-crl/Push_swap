@@ -7,6 +7,7 @@ void sa(t_stack *stack) //swap the top two numbers in a stack A
         return ;
     stack->stackA[0] = stack->stackA[1];
     stack->stackA[1] = temp;
+    stack->cmd = ft_strjoin(stack->cmd, " sa");
 }
 
 void sb(t_stack *stack) //swap the top two numbers in a stack B
@@ -14,12 +15,14 @@ void sb(t_stack *stack) //swap the top two numbers in a stack B
     int temp = stack->stackB[find_top_b(stack) + 1];
     stack->stackB[find_top_b(stack) + 1] = stack->stackB[find_top_b(stack) + 2];
     stack->stackB[find_top_b(stack) + 2] = temp;
+    stack->cmd = ft_strjoin(stack->cmd, " sb");
 }
 
 void ss(t_stack *stack) //swap the top two numbers in a stack A and B
 {
     sa(stack);
     sb(stack);
+    stack->cmd = ft_strjoin(stack->cmd, " sa sb");
 }
 
 int find_botton(t_stack *stack)
@@ -39,6 +42,7 @@ void rra(t_stack *stack) //swap the botton to the top stack A
     for (i = botton; i > 0; i--)
         stack->stackA[i] = stack->stackA[i-1];
     stack->stackA[0] = x;
+    stack->cmd = ft_strjoin(stack->cmd, " rra");
 }
 
 void rrb(t_stack *stack) //swap the botton to the top stack B
@@ -47,12 +51,14 @@ void rrb(t_stack *stack) //swap the botton to the top stack B
     for (i = stack->size; i > 0; i--)
         stack->stackB[i] = stack->stackB[i - 1];
     stack->stackB[find_top_b(stack)] = x;
+    stack->cmd = ft_strjoin(stack->cmd, " rrb");
 }
 
 void rrr(t_stack *stack) // swap the top to the botton stack A and B
 {
     rrb(stack);
     rra(stack);
+    stack->cmd = ft_strjoin(stack->cmd, " rrb rra");
 }
 
 void ra(t_stack *stack) // swap the top to the botton stack A
@@ -62,6 +68,7 @@ void ra(t_stack *stack) // swap the top to the botton stack A
     for (i = 0; i <= botton; i++)
         stack->stackA[i] = stack->stackA[i + 1];
     stack->stackA[botton] = x;
+    stack->cmd = ft_strjoin(stack->cmd, " ra");
 }
 
 void rb(t_stack *stack) // swap the botton to the top stack B
@@ -75,12 +82,14 @@ void rb(t_stack *stack) // swap the botton to the top stack B
         i++;
     }
     stack->stackB[stack->size] = top;
+    stack->cmd = ft_strjoin(stack->cmd, " rb");
 }
 
 void rr(t_stack *stack) // swap the botton to the top stack A and B
 {
     ra(stack);
     rb(stack);
+    stack->cmd = ft_strjoin(stack->cmd, " ra rb");
 }
 
 int find_top_b(t_stack *stack)
@@ -106,6 +115,7 @@ void pb(t_stack *stack)
         i++;
     }
     stack->stackB[find_top_b(stack)] = save;
+    stack->cmd = ft_strjoin(stack->cmd, " pb");
 }
 
 void pa(t_stack *stack)
@@ -121,4 +131,5 @@ void pa(t_stack *stack)
         i--;
     }
     stack->stackA[i] = save;
+    stack->cmd = ft_strjoin(stack->cmd, " pa");
 }
