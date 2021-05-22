@@ -1,8 +1,33 @@
 #include "push_swap.h"
 
+void print_stack(t_stack *stack)
+{
+    int i = 0;
+    printf("\033[1;36mUsed\033[1;34m%s\n", stack->cmd);
+    printf("\033[1;36mSize\033[1;34m %d\n", stack->size);
+    while (i <= stack->size)
+    {
+        if (stack->stackA[i] == 0)
+            printf(" ");
+        else
+            printf("   \033[1;33m%-6d", stack->stackA[i]);
+        if (stack->stackB[i] == 0)
+            printf(" ");
+        else
+            printf("\033[1;31m%10d", stack->stackB[i]);
+        i++;
+        printf("\n");
+    }
+    printf("\033[1;33m stackA");
+    printf("\033[1;31m stackB");
+    printf("\n");
+
+}
+
 int ft_strlen(const char *str)
 {
     int i;
+    i = 0;
     while (str[i])
         i++;
     return(i);
@@ -64,23 +89,45 @@ int find_small(t_stack *stack)
             small = stack->stackA[i];
         i++;
     }
-    i = 0;
-    while (i <= stack->size)
+    return (small);
+}
+
+int find_position(t_stack *stack, int number)
+{
+    int i = 0;
+    while (i < stack->size)
     {
-        if (small == stack->stackA[i])
-            return (i);
+        if (stack->stackA[i] == number)
+            break;
         i++;
     }
-    return (-1);
+    return (i);
 }
 
 void move_top(t_stack *stack)
 {
-    int i = find_small(stack);
-    while (i > 0)
+    int small = find_small(stack);
+    int pos = find_position(stack, small);
+    int j = 0;
+    if (pos > (stack->size / 2))
     {
-        ra(stack);
-        i--;
+        while (j < stack->size)
+        {
+            if (stack->stackA[0] == small)
+                break;
+            rra(stack);
+            j++;
+        }
+    }
+    else
+    {
+        while (j < stack->size)
+        {
+            if (stack->stackA[0] == small)
+                break;
+            ra(stack);
+            j++;
+        }
     }
 }
 
@@ -115,8 +162,8 @@ int main(int argc, char **argv)
 
     stack.cmd = " ";
     stack.size = argc - 2;
-    stack.stackA = calloc(stack.size + 1, sizeof(int));
-    stack.stackB = calloc(stack.size + 1, sizeof(int));
+    stack.stackA = calloc(stack.size, sizeof(int *));
+    stack.stackB = calloc(stack.size, sizeof(int *));
     i = 0;
     while (i <= stack.size)
     {
@@ -128,7 +175,6 @@ int main(int argc, char **argv)
         organize_3(&stack);
     else
     {
-        move_top(&stack);
         i = 0;
         while (i < stack.size)
         {
@@ -138,24 +184,9 @@ int main(int argc, char **argv)
         }
         i = 0;
         while (i++ < stack.size)
+        {
             pa(&stack);
+        }
+        print_stack(&stack);
     }
-    i = 0;
-    printf("\033[1;36mUsed\033[1;34m%s\n\n", stack.cmd);
-    while (i <= stack.size)
-    {
-        if (stack.stackA[i] == 0)
-            printf(" ");
-        else
-            printf("   \033[1;33m%-6d", stack.stackA[i]);
-        if (stack.stackB[i] == 0)
-            printf(" ");
-        else
-            printf("\033[1;31m%10d", stack.stackB[i]);
-        i++;
-        printf("\n");
-    }
-    printf("\033[1;33m stackA");
-    printf("\033[1;31m stackB");
-    printf("\n");
 }
