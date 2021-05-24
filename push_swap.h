@@ -32,5 +32,6 @@ void organize_3(t_stack *stack);
 int find_botton(t_stack *stack);
 int find_top_b(t_stack *stack);
 char	*ft_strjoin(char const *s1, char const *s2);
+void ft_sort(int size, int *array);
 
 #endif

@@ -4,7 +4,7 @@ void print_stack(t_stack *stack)
 {
     int i = 0;
     printf("\033[1;36mUsed\033[1;34m%s\n", stack->cmd);
-    printf("\033[1;36mSize\033[1;34m %d\n", stack->size);
+    printf("\033[1;36mSize\033[1;34m %d\n", stack->size + 1);
     while (i <= stack->size)
     {
         if (stack->stackA[i] == 0)
@@ -154,6 +154,19 @@ void organize_3(t_stack *stack)
         rra(stack);
 }
 
+int find_new_size(t_stack *stack)
+{
+    int i = 0;
+    int count = 0;
+    while (i < stack->size)
+    {
+        if (stack->stackA[i] != 0)
+            count++;
+        i++;
+    }
+    return (count);
+}
+
 int main(int argc, char **argv)
 {   
     t_stack stack;
@@ -162,8 +175,8 @@ int main(int argc, char **argv)
 
     stack.cmd = " ";
     stack.size = argc - 2;
-    stack.stackA = calloc(stack.size, sizeof(int *));
-    stack.stackB = calloc(stack.size, sizeof(int *));
+    stack.stackA = calloc(stack.size + 1, sizeof(int));
+    stack.stackB = calloc(stack.size + 1, sizeof(int));
     i = 0;
     while (i <= stack.size)
     {
@@ -175,17 +188,59 @@ int main(int argc, char **argv)
         organize_3(&stack);
     else
     {
-        i = 0;
-        while (i < stack.size)
+        int *array;
+        array = malloc(sizeof(int) * stack.size + 1);
+        memcpy(array , stack.stackA, sizeof(int) * stack.size + 1);
+        ft_sort(stack.size, array);
+        int middle = (stack.size) / 2;
+        middle = array[middle + 1];
+        i = -1;
+        while (++i <= stack.size)
         {
-            move_top(&stack);
-            pb(&stack);
-            i++;
+           if (stack.stackA[0] < middle)
+            {
+                while (stack.stackA[0] < middle)
+                    pb(&stack);
+            }
+            else
+                break ;
         }
         i = 0;
-        while (i++ < stack.size)
+        while (i <= stack.size)
         {
-            pa(&stack);
+            ra(&stack);
+            while (stack.stackA[0] < middle)
+                pb(&stack);
+            i++;
+        }
+        free(array);
+        int size = find_new_size(&stack);
+        array = malloc(sizeof(int) * size);
+        i = 0;
+        while (i <= size)
+        {
+            array[i] = stack.stackA[i];
+            i++;
+        }
+        middle = size / 2;
+        middle = array[middle];
+        i = -1;
+        while (++i <= size)
+        {
+            if (stack.stackA[0] < middle)
+            {
+                while (stack.stackA[0] < middle)
+                    pb(&stack);
+            }
+            else
+                break ;
+        }
+        i = -1;
+        while (++i <= size)
+        {
+            rra(&stack);
+            while (stack.stackA[0] < middle)
+                pb(&stack);
         }
         print_stack(&stack);
     }
