@@ -184,38 +184,52 @@ int find_new_size_b(t_stack *stack)
 int midle_number(t_stack *stack)
 {
     int *array;
-    array = malloc(sizeof(int) * find_new_size(stack));
-    memcpy(array , stack->stackA, sizeof(int) * find_new_size(stack));
+    array = malloc(sizeof(int *) * find_new_size(stack));
+    memcpy(array , stack->stackA, sizeof(int *) * find_new_size(stack));
     ft_sort(find_new_size(stack), array);
     int middle = find_new_size(stack) / 2;
     middle = array[middle];
-    //free(array);
+    free(array);
     return (middle);
+}
+
+int has_less(t_stack *stack, int middle)
+{
+    int i = 0;
+    while (i < stack->size)
+    {
+        if (stack->stackA[i] < middle && stack->stackA[i] != 0)
+        {
+            stack->pos = i;
+            return (1);
+        }
+        i++;
+    }
+    return (0);
 }
 
 void veryfi_top_botton(t_stack *stack, int middle)
 {
+    while(stack->stackA[0] < middle)
+        pb(stack);
     int size = find_new_size(stack);
-    int new_size;
-    new_size = new_size / 2;
-    int distance = find_small(stack) - find_botton(stack);
-    while (middle != stack->stackA[0])
+    if (stack->pos > size / 2)
     {
-        if (distance < new_size)
+        while (has_less(stack, middle))
+        {
+            while (stack->stackA[0] < middle)
+                pb(stack);
             rra(stack);
-         else
-             ra(stack);
-        if (stack->stackA[0] < middle)
-            pb(stack);
+        }
     }
-    while (middle != stack->stackA[find_botton(stack)])
+    else
     {
-        if (distance < new_size)
-            rra(stack);
-        else
+        while (has_less(stack, middle))
+        {
+            while (stack->stackA[0] < middle)
+                pb(stack);
             ra(stack);
-        if (stack->stackA[0] < middle)
-            pb(stack);
+        }
     }
 }
 
@@ -251,6 +265,7 @@ int main(int argc, char **argv)
     int i = 0;
     int j = 1;
     stack.cont_move = 0;
+    stack.pos = 0;
     stack.cmd = " ";
     stack.size = argc - 1;
     stack.stackA = calloc(stack.size, sizeof(int *));
@@ -279,7 +294,7 @@ int main(int argc, char **argv)
         pa(&stack);
         pa(&stack);
         printf("\033[1;36mmoves\033[1;34m %d\n", stack.cont_move);
-        //print_stack(&stack);
+       // print_stack(&stack);
     }
     
 }

@@ -12,6 +12,7 @@ typedef struct s_stack
     int *stackB;
     int size;
     int cont_move;
+    int pos;
     char *cmd;
 } t_stack;
 
