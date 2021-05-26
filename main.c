@@ -213,6 +213,7 @@ void veryfi_top_botton(t_stack *stack, int middle)
     while(stack->stackA[0] < middle)
         pb(stack);
     int size = find_new_size(stack);
+    has_less(stack,middle);
     if (stack->pos > size / 2)
     {
         while (has_less(stack, middle))
@@ -285,11 +286,7 @@ int main(int argc, char **argv)
             int middle = midle_number(&stack);
             veryfi_top_botton(&stack, middle);
         }
-        if (find_new_size(&stack) == 3)
-            organize_3(&stack);
-        else if (stack.stackA[0] > stack.stackA[1] && find_new_size(&stack) == 2)
-            sa(&stack);
-        while (find_new_size_b(&stack) > 2)
+        while (find_new_size_b(&stack) > 0)
             organize_b(&stack);
         pa(&stack);
         pa(&stack);
