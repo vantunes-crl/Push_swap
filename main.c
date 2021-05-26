@@ -154,28 +154,6 @@ void organize_3(t_stack *stack)
     else if (top < middle && middle > botton && botton < top) // 2 3 1
         rra(stack);
 }
-void organize_3_b(t_stack *stack)
-{
-    int botton = stack->stackA[stack->size];
-    int top = stack->stackA[find_top_b(stack) + 1];
-    int middle = stack->stackA[stack->size - 1];
-    if (top > middle && middle < botton && botton > top) // 2 1 3
-        sb(stack);
-    else if (top > middle && middle > botton && botton < top) // 3 2 1
-    {
-        sb(stack);
-        rrb(stack);
-    }
-    else if (top > middle && middle < botton && botton < top) // 3 1 2
-        rb(stack);
-    else if (top < middle && middle > botton && botton > top) // 1 3 2
-    {
-        sb(stack);
-        rb(stack);
-    }
-    else if (top < middle && middle > botton && botton < top) // 2 3 1
-        rrb(stack);
-}
 
 int find_new_size(t_stack *stack)
 {
@@ -217,19 +195,25 @@ int midle_number(t_stack *stack)
 
 void veryfi_top_botton(t_stack *stack, int middle)
 {
+    int size = find_new_size(stack);
+    int new_size;
+    new_size = new_size / 2;
+    int distance = find_small(stack) - find_botton(stack);
     while (middle != stack->stackA[0])
     {
-        rra(stack);
-        if ( stack->stackA[0] < middle)
+        if (distance < new_size)
+            rra(stack);
+         else
+             ra(stack);
+        if (stack->stackA[0] < middle)
             pb(stack);
     }
-}
-
-void verify_botton_top(t_stack *stack, int middle)
-{
     while (middle != stack->stackA[find_botton(stack)])
     {
-        rra(stack);
+        if (distance < new_size)
+            rra(stack);
+        else
+            ra(stack);
         if (stack->stackA[0] < middle)
             pb(stack);
     }
@@ -285,23 +269,17 @@ int main(int argc, char **argv)
         {
             int middle = midle_number(&stack);
             veryfi_top_botton(&stack, middle);
-            verify_botton_top(&stack, middle);
         }
         if (find_new_size(&stack) == 3)
             organize_3(&stack);
         else if (stack.stackA[0] > stack.stackA[1] && find_new_size(&stack) == 2)
             sa(&stack);
-        while (find_new_size_b(&stack) > 3)
+        while (find_new_size_b(&stack) > 2)
             organize_b(&stack);
-        if (find_new_size_b(&stack) == 2 && stack.stackB[stack.size] > stack.stackB[stack.size - 1])
-            sb(&stack);
-        else
-            organize_3_b(&stack);
         pa(&stack);
         pa(&stack);
-        pa(&stack);
-        pa(&stack);
-        print_stack(&stack);
+        printf("\033[1;36mmoves\033[1;34m %d\n", stack.cont_move);
+        //print_stack(&stack);
     }
     
 }
