@@ -4,7 +4,8 @@ void print_stack(t_stack *stack)
 {
     int i = 0;
     printf("\033[1;36mUsed\033[1;34m%s\n", stack->cmd);
-    printf("\033[1;36mSize\033[1;34m %d\n", stack->size + 1);
+    printf("\033[1;36mSize\033[1;34m %d\n", stack->size);
+    printf("\033[1;36mmoves\033[1;34m %d\n", stack->cont_move);
     while (i <= stack->size)
     {
         if (stack->stackA[i] == 0)
@@ -61,17 +62,17 @@ int find_big(t_stack *stack)
 {
     int i = 0;
     int big;
-    big = stack->stackA[i];
+    big = stack->stackB[0];
     while (i <= stack->size)
     {
-        if (big < stack->stackA[i])
-            big = stack->stackA[i];
+        if (big <= stack->stackB[i])
+            big = stack->stackB[i];
         i++;
     }
     i = 0;
     while (i <= stack->size)
     {
-        if (big == stack->stackA[i])
+        if (big == stack->stackB[i])
             return (i);
         i++;
     }
@@ -153,6 +154,28 @@ void organize_3(t_stack *stack)
     else if (top < middle && middle > botton && botton < top) // 2 3 1
         rra(stack);
 }
+void organize_3_b(t_stack *stack)
+{
+    int botton = stack->stackA[stack->size];
+    int top = stack->stackA[find_top_b(stack) + 1];
+    int middle = stack->stackA[stack->size - 1];
+    if (top > middle && middle < botton && botton > top) // 2 1 3
+        sb(stack);
+    else if (top > middle && middle > botton && botton < top) // 3 2 1
+    {
+        sb(stack);
+        rrb(stack);
+    }
+    else if (top > middle && middle < botton && botton < top) // 3 1 2
+        rb(stack);
+    else if (top < middle && middle > botton && botton > top) // 1 3 2
+    {
+        sb(stack);
+        rb(stack);
+    }
+    else if (top < middle && middle > botton && botton < top) // 2 3 1
+        rrb(stack);
+}
 
 int find_new_size(t_stack *stack)
 {
@@ -167,81 +190,118 @@ int find_new_size(t_stack *stack)
     return (count);
 }
 
+int find_new_size_b(t_stack *stack)
+{
+    int i = 0;
+    int count = 0;
+    while (i <= stack->size)
+    {
+        if (stack->stackB[i] != 0)
+            count++;
+        i++;
+    }
+    return (count);
+}
+
+int midle_number(t_stack *stack)
+{
+    int *array;
+    array = malloc(sizeof(int) * find_new_size(stack));
+    memcpy(array , stack->stackA, sizeof(int) * find_new_size(stack));
+    ft_sort(find_new_size(stack), array);
+    int middle = find_new_size(stack) / 2;
+    middle = array[middle];
+    //free(array);
+    return (middle);
+}
+
+void veryfi_top_botton(t_stack *stack, int middle)
+{
+    while (middle != stack->stackA[0])
+    {
+        rra(stack);
+        if ( stack->stackA[0] < middle)
+            pb(stack);
+    }
+}
+
+void verify_botton_top(t_stack *stack, int middle)
+{
+    while (middle != stack->stackA[find_botton(stack)])
+    {
+        rra(stack);
+        if (stack->stackA[0] < middle)
+            pb(stack);
+    }
+}
+
+void organize_b(t_stack *stack)
+{
+    int new_size = find_new_size_b(stack);
+    new_size = new_size / 2;
+    int distance = (find_big(stack) - find_top_b(stack));
+    while (stack->stackB[find_top_b(stack) + 1] != stack->stackB[find_big(stack)])
+    {
+        if (distance > new_size)
+            rrb(stack);
+        else
+            rb(stack);
+    }
+    pa(stack);
+    new_size = find_new_size_b(stack);
+    new_size = new_size / 2;
+    distance = (find_big(stack) - find_top_b(stack));
+    while (stack->stackB[find_top_b(stack) + 1] != stack->stackB[find_big(stack)])
+    {
+        if (distance > new_size)
+            rrb(stack);
+        else
+            rb(stack);
+    }
+    pa(stack);
+}
+
 int main(int argc, char **argv)
 {   
     t_stack stack;
-    int i;
+    int i = 0;
     int j = 1;
-
+    stack.cont_move = 0;
     stack.cmd = " ";
-    stack.size = argc - 2;
-    stack.stackA = calloc(stack.size + 1, sizeof(int));
-    stack.stackB = calloc(stack.size + 1, sizeof(int));
-    i = 0;
-    while (i <= stack.size)
+    stack.size = argc - 1;
+    stack.stackA = calloc(stack.size, sizeof(int *));
+    stack.stackB = calloc(stack.size, sizeof(int *));
+    i = -1;
+    while (++i < stack.size)
     {
-        stack.stackA[i] = atoi(strdup(argv[j]));
+        stack.stackA[i] = atoi(argv[j]);
         j++;
-        i++;
     }
     if (argc == 4)
         organize_3(&stack);
     else
     {
-        int *array;
-        array = malloc(sizeof(int) * stack.size + 1);
-        memcpy(array , stack.stackA, sizeof(int) * stack.size + 1);
-        ft_sort(stack.size, array);
-        int middle = (stack.size) / 2;
-        middle = array[middle + 1];
-        i = -1;
-        while (++i <= stack.size)
+        while (find_new_size(&stack) > 3)
         {
-           if (stack.stackA[0] < middle)
-            {
-                while (stack.stackA[0] < middle)
-                    pb(&stack);
-            }
-            else
-                break ;
+            int middle = midle_number(&stack);
+            veryfi_top_botton(&stack, middle);
+            verify_botton_top(&stack, middle);
         }
-        i = 0;
-        while (i <= stack.size)
-        {
-            ra(&stack);
-            while (stack.stackA[0] < middle)
-                pb(&stack);
-            i++;
-        }
-        free(array);
-        int size = find_new_size(&stack);
-        array = malloc(sizeof(int) * size);
-        i = 0;
-        while (i <= size)
-        {
-            array[i] = stack.stackA[i];
-            i++;
-        }
-        middle = size / 2;
-        middle = array[middle];
-        i = -1;
-        while (++i <= size)
-        {
-            if (stack.stackA[0] < middle)
-            {
-                while (stack.stackA[0] < middle)
-                    pb(&stack);
-            }
-            else
-                break ;
-        }
-        i = -1;
-        while (++i <= size)
-        {
-            rra(&stack);
-            while (stack.stackA[0] < middle)
-                pb(&stack);
-        }
+        if (find_new_size(&stack) == 3)
+            organize_3(&stack);
+        else if (stack.stackA[0] > stack.stackA[1] && find_new_size(&stack) == 2)
+            sa(&stack);
+        while (find_new_size_b(&stack) > 3)
+            organize_b(&stack);
+        if (find_new_size_b(&stack) == 2 && stack.stackB[stack.size] > stack.stackB[stack.size - 1])
+            sb(&stack);
+        else
+            organize_3_b(&stack);
+        pa(&stack);
+        pa(&stack);
+        pa(&stack);
+        pa(&stack);
         print_stack(&stack);
     }
+    
 }
