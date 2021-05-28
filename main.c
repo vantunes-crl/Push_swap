@@ -1,30 +1,5 @@
 #include "push_swap.h"
 
-void print_stack(t_stack *stack)
-{
-    int i = 0;
-    printf("\033[1;36mUsed\033[1;34m%s\n", stack->cmd);
-    printf("\033[1;36mSize\033[1;34m %d\n", stack->size);
-    printf("\033[1;36mmoves\033[1;34m %d\n", stack->cont_move);
-    while (i < stack->size)
-    {
-        if (stack->stackA[i] == 0)
-            printf(" ");
-        else
-            printf("   \033[1;33m%-6d", stack->stackA[i]);
-        if (stack->stackB[i] == 0)
-            printf(" ");
-        else
-            printf("\033[1;31m%10d", stack->stackB[i]);
-        i++;
-        printf("\n");
-    }
-    printf("\033[1;33m stackA");
-    printf("\033[1;31m stackB");
-    printf("\n");
-
-}
-
 int ft_strlen(const char *str)
 {
     int i;
@@ -260,7 +235,7 @@ int main(int argc, char **argv)
     int j = 1;
     stack.cont_move = 0;
     stack.pos = 0;
-    stack.cmd = " ";
+    stack.cmd = "";
     stack.size = argc - 1;
     stack.stackA = calloc(stack.size, sizeof(int *));
     stack.stackB = calloc(stack.size, sizeof(int *));
@@ -283,9 +258,6 @@ int main(int argc, char **argv)
         organize_3(&stack);
         while (find_new_size_b(&stack) > 0)
             organize_b(&stack);
-        pa(&stack);
-        pa(&stack);
-       printf("\033[1;36mmoves\033[1;34m %d\n", stack.cont_move);
-       // print_stack(&stack);
+        write(1,stack.cmd, ft_strlen(stack.cmd));
     }
 } 
