@@ -6,7 +6,7 @@ void print_stack(t_stack *stack)
     printf("\033[1;36mUsed\033[1;34m%s\n", stack->cmd);
     printf("\033[1;36mSize\033[1;34m %d\n", stack->size);
     printf("\033[1;36mmoves\033[1;34m %d\n", stack->cont_move);
-    while (i <= stack->size)
+    while (i < stack->size)
     {
         if (stack->stackA[i] == 0)
             printf(" ");
@@ -221,6 +221,8 @@ void veryfi_top_botton(t_stack *stack, int middle)
             while (stack->stackA[0] < middle)
                 pb(stack);
             rra(stack);
+            while (stack->stackA[0] < middle)
+                pb(stack);
         }
     }
     else
@@ -230,6 +232,8 @@ void veryfi_top_botton(t_stack *stack, int middle)
             while (stack->stackA[0] < middle)
                 pb(stack);
             ra(stack);
+            while (stack->stackA[0] < middle)
+                pb(stack);
         }
     }
 }
@@ -281,17 +285,19 @@ int main(int argc, char **argv)
         organize_3(&stack);
     else
     {
+        int middle;
         while (find_new_size(&stack) > 3)
         {
-            int middle = midle_number(&stack);
+            middle = midle_number(&stack);
             veryfi_top_botton(&stack, middle);
         }
+        organize_3(&stack);
         while (find_new_size_b(&stack) > 0)
             organize_b(&stack);
         pa(&stack);
         pa(&stack);
-        printf("\033[1;36mmoves\033[1;34m %d\n", stack.cont_move);
-       // print_stack(&stack);
+       // printf("\033[1;36mmoves\033[1;34m %d\n", stack.cont_move);
+        print_stack(&stack);
     }
     
 }
