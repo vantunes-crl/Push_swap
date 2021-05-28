@@ -62,10 +62,10 @@ int find_big(t_stack *stack)
 {
     int i = 0;
     int big;
-    big = stack->stackB[0];
+    big = -9999;
     while (i <= stack->size)
     {
-        if (big <= stack->stackB[i])
+        if (big <= stack->stackB[i] && stack->stackB[i] != 0)
             big = stack->stackB[i];
         i++;
     }
@@ -251,17 +251,6 @@ void organize_b(t_stack *stack)
             rb(stack);
     }
     pa(stack);
-    new_size = find_new_size_b(stack);
-    new_size = new_size / 2;
-    distance = (find_big(stack) - find_top_b(stack));
-    while (stack->stackB[find_top_b(stack) + 1] != stack->stackB[find_big(stack)])
-    {
-        if (distance > new_size)
-            rrb(stack);
-        else
-            rb(stack);
-    }
-    pa(stack);
 }
 
 int main(int argc, char **argv)
@@ -296,8 +285,7 @@ int main(int argc, char **argv)
             organize_b(&stack);
         pa(&stack);
         pa(&stack);
-       // printf("\033[1;36mmoves\033[1;34m %d\n", stack.cont_move);
-        print_stack(&stack);
+       printf("\033[1;36mmoves\033[1;34m %d\n", stack.cont_move);
+       // print_stack(&stack);
     }
-    
-}
+} 
