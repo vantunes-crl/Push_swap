@@ -13,6 +13,7 @@ typedef struct s_stack
     int size;
     int cont_move;
     int pos;
+    int chunk;
     char *cmd;
 } t_stack;
 
@@ -49,6 +50,7 @@ int     find_new_size_b(t_stack *stack);
 
 int     has_less(t_stack *stack, int middle);
 int     midle_number(t_stack *stack);
+int     middle_move(t_stack *stack);
 char    *ft_strjoin(char const *s1, char const *s2);
 void    ft_sort(int size, int *array);
 int     ft_strlen(const char *str);

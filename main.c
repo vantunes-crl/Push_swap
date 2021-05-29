@@ -8,6 +8,7 @@ int main(int argc, char **argv)
     stack.cont_move = 0;
     stack.pos = 0;
     stack.cmd = "";
+    stack.chunk = 0;
     stack.size = argc - 1;
     stack.stackA = calloc(stack.size, sizeof(int *));
     stack.stackB = calloc(stack.size, sizeof(int *));
@@ -19,7 +20,7 @@ int main(int argc, char **argv)
     }
     if (argc == 4)
         organize_3(&stack);
-    else
+    else if (argc <= 101)
     {
         int middle;
         while (find_new_size(&stack) > 3)
@@ -31,8 +32,18 @@ int main(int argc, char **argv)
         while (find_new_size_b(&stack) > 0)
             organize_b(&stack);
     }
-    //else
-      //  organize_500(&stack);
+    else
+    {
+        int middle;
+        while (find_new_size(&stack) > 3)
+        {
+            middle = middle_move(&stack);
+            organize_a(&stack, middle);
+        }
+        organize_3(&stack);
+        while (find_new_size_b(&stack) > 0)
+            organize_b(&stack);
+    }
     write(1,stack.cmd, ft_strlen(stack.cmd));
     free(stack.cmd);
     free(stack.stackA);

@@ -16,3 +16,16 @@ void ft_sort(int size, int *array)
     i++;
     }
 }
+
+int middle_move(t_stack *stack)
+{
+    int i = 0;
+    int *array;
+    int middle;
+    array = malloc(sizeof(int *) * stack->size);
+    memcpy(array , stack->stackA, sizeof(int *) * stack->size);
+    ft_sort(stack->size, array);
+    stack->chunk = stack->chunk + (stack->size / 10);
+    middle = array[stack->chunk];
+    return (middle);
+}
