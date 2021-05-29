@@ -33,6 +33,8 @@ void    pa(t_stack *stack); // send the top of A to B
 /* organize functions */
 
 void    organize_3(t_stack *stack);
+void    organize_b(t_stack *stack);
+void    organize_a(t_stack *stack, int middle);
 
 /* find functions */
 int     find_botton(t_stack *stack);
