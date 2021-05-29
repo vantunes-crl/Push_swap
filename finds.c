@@ -46,14 +46,7 @@ int find_big_nb(t_stack *stack)
             big = stack->stackB[i];
         i++;
     }
-    i = 0;
-    while (i <= stack->size)
-    {
-        if (big == stack->stackB[i])
-            return (i);
-        i++;
-    }
-    return 0;
+    return (big);
 }
 
 int find_new_size(t_stack *stack)

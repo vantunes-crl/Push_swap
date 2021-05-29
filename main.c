@@ -19,7 +19,7 @@ int main(int argc, char **argv)
     }
     if (argc == 4)
         organize_3(&stack);
-    else if (argc <= 101)
+    else
     {
         int middle;
         while (find_new_size(&stack) > 3)
@@ -31,6 +31,8 @@ int main(int argc, char **argv)
         while (find_new_size_b(&stack) > 0)
             organize_b(&stack);
     }
+    //else
+      //  organize_500(&stack);
     write(1,stack.cmd, ft_strlen(stack.cmd));
     free(stack.cmd);
     free(stack.stackA);
