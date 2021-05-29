@@ -31,8 +31,6 @@ void organize_a(t_stack *stack, int middle)
     has_less(stack,middle);
     while (has_less(stack, middle))
     {
-        if (stack->stackA[1] == find_small(stack) && stack->stackB[find_top_b(stack) + 2] == find_big_nb(stack))
-            ss(stack);
         while (stack->stackA[0] < middle)
             pb(stack);
         if (stack->pos > size / 2)
