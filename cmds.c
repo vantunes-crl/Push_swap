@@ -25,7 +25,7 @@ void ss(t_stack *stack) //swap the top two numbers in a stack A and B
     sa(stack);
     sb(stack);
     stack->cont_move++;
-    stack->cmd = ft_strjoin(stack->cmd, " sa sb");
+    stack->cmd = ft_strjoin(stack->cmd, "ss\n");
 }
 
 int find_botton(t_stack *stack)

@@ -1,112 +1,5 @@
 #include "push_swap.h"
 
-int ft_strlen(const char *str)
-{
-    int i;
-    i = 0;
-    while (str[i])
-        i++;
-    return(i);
-}
-
-char	*ft_strjoin(char const *s1, char const *s2)
-{
-	char	*news;
-	int		i;
-	int		j;
-
-	i = 0;
-	j = 0;
-	news = (char *)malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
-	while (s1[i] != '\0')
-	{
-		news[i] = s1[i];
-		i++;
-	}
-	while (s2[j] != '\0')
-	{
-		news[i] = s2[j];
-		j++;
-		i++;
-	}
-	news[i] = '\0';
-	return (news);
-}
-
-int find_big(t_stack *stack)
-{
-    int i = 0;
-    int big;
-    big = -9999;
-    while (i <= stack->size)
-    {
-        if (big <= stack->stackB[i] && stack->stackB[i] != 0)
-            big = stack->stackB[i];
-        i++;
-    }
-    i = 0;
-    while (i <= stack->size)
-    {
-        if (big == stack->stackB[i])
-            return (i);
-        i++;
-    }
-    return (-1);
-}
-
-int find_small(t_stack *stack)
-{
-    int i = 0;
-    int small;
-    small = stack->stackA[i];
-    while (i <= stack->size)
-    {
-        if (small > stack->stackA[i] && stack->stackA[i] != 0)
-            small = stack->stackA[i];
-        i++;
-    }
-    return (small);
-}
-
-int find_position(t_stack *stack, int number)
-{
-    int i = 0;
-    while (i < stack->size)
-    {
-        if (stack->stackA[i] == number)
-            break;
-        i++;
-    }
-    return (i);
-}
-
-void move_top(t_stack *stack)
-{
-    int small = find_small(stack);
-    int pos = find_position(stack, small);
-    int j = 0;
-    if (pos > (stack->size / 2))
-    {
-        while (j < stack->size)
-        {
-            if (stack->stackA[0] == small)
-                break;
-            rra(stack);
-            j++;
-        }
-    }
-    else
-    {
-        while (j < stack->size)
-        {
-            if (stack->stackA[0] == small)
-                break;
-            ra(stack);
-            j++;
-        }
-    }
-}
-
 void organize_3(t_stack *stack)
 {
     int botton = stack->stackA[2] ;
@@ -130,61 +23,14 @@ void organize_3(t_stack *stack)
         rra(stack);
 }
 
-int find_new_size(t_stack *stack)
-{
-    int i = 0;
-    int count = 0;
-    while (i < stack->size)
-    {
-        if (stack->stackA[i] != 0)
-            count++;
-        i++;
-    }
-    return (count);
-}
-
-int find_new_size_b(t_stack *stack)
-{
-    int i = 0;
-    int count = 0;
-    while (i <= stack->size)
-    {
-        if (stack->stackB[i] != 0)
-            count++;
-        i++;
-    }
-    return (count);
-}
-
-int midle_number(t_stack *stack)
-{
-    int *array;
-    array = malloc(sizeof(int *) * find_new_size(stack));
-    memcpy(array , stack->stackA, sizeof(int *) * find_new_size(stack));
-    ft_sort(find_new_size(stack), array);
-    int middle = find_new_size(stack) / 2;
-    middle = array[middle];
-    free(array);
-    return (middle);
-}
-
-int has_less(t_stack *stack, int middle)
-{
-    int i = 0;
-    while (i < stack->size)
-    {
-        if (stack->stackA[i] < middle && stack->stackA[i] != 0)
-        {
-            stack->pos = i;
-            return (1);
-        }
-        i++;
-    }
-    return (0);
-}
-
 void veryfi_top_botton(t_stack *stack, int middle)
 {
+    if (stack->stackA[1] == find_small(stack) && stack->stackB[find_top_b(stack) + 2] == find_big_nb(stack))
+        ss(stack);
+    else if (stack->stackB[find_top_b(stack) + 2] == find_big_nb(stack) && find_new_size_b(stack) > 3)
+        sb(stack);
+    else if(stack->stackA[1] == find_small(stack))
+        sa(stack);
     while(stack->stackA[0] < middle)
         pb(stack);
     int size = find_new_size(stack);
@@ -215,6 +61,8 @@ void veryfi_top_botton(t_stack *stack, int middle)
 
 void organize_b(t_stack *stack)
 {
+    if (stack->stackB[find_top_b(stack) + 2] == find_big_nb(stack) && find_new_size_b(stack) > 3)
+        sb(stack);
     int new_size = find_new_size_b(stack);
     new_size = new_size / 2;
     int distance = (find_big(stack) - find_top_b(stack));
@@ -247,7 +95,7 @@ int main(int argc, char **argv)
     }
     if (argc == 4)
         organize_3(&stack);
-    else
+    else if (argc <= 101)
     {
         int middle;
         while (find_new_size(&stack) > 3)
@@ -258,6 +106,9 @@ int main(int argc, char **argv)
         organize_3(&stack);
         while (find_new_size_b(&stack) > 0)
             organize_b(&stack);
-        write(1,stack.cmd, ft_strlen(stack.cmd));
     }
+    write(1,stack.cmd, ft_strlen(stack.cmd));
+    free(stack.cmd);
+    free(stack.stackA);
+    free(stack.stackB);
 } 
