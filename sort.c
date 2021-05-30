@@ -27,5 +27,6 @@ int middle_move(t_stack *stack)
     ft_sort(stack->size, array);
     stack->chunk = stack->chunk + (stack->size / 10);
     middle = array[stack->chunk];
+    free(array);
     return (middle);
 }

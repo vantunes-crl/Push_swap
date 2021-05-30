@@ -41,7 +41,6 @@ void    organize_a(t_stack *stack, int middle);
 int     find_botton(t_stack *stack);
 int     find_top_b(t_stack *stack);
 int     find_big(t_stack *stack);
-int     find_big_nb(t_stack *stack);
 int     find_small(t_stack *stack);
 int     find_new_size(t_stack *stack);
 int     find_new_size_b(t_stack *stack);

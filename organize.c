@@ -44,7 +44,7 @@ void organize_a(t_stack *stack, int middle)
 
 void organize_b(t_stack *stack)
 {
-    if (stack->stackB[find_top_b(stack) + 2] == find_big_nb(stack) && find_new_size_b(stack) > 3)
+    if (stack->stackB[find_top_b(stack) + 2] == stack->stackB[find_big(stack)] && find_new_size_b(stack) > 3)
         sb(stack);
     int new_size = find_new_size_b(stack);
     new_size = new_size / 2;

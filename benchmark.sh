@@ -10,6 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
+
 #!/bin/bash
 
 MAX=0
@@ -21,7 +22,7 @@ SUM=0
 for i in {1..100}
 do
 		export ARG=`ruby -e "puts (1..500).to_a.shuffle.join(' ')"`
-		if ./push_swap $ARG | grep -q KO
+		if ./push_swap $ARG | ./checker_linux $ARG
 		then
 			echo "Error!"
 			echo $ARG

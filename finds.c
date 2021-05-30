@@ -35,18 +35,13 @@ int find_small(t_stack *stack)
     return (small);
 }
 
-int find_big_nb(t_stack *stack)
+int find_top_b(t_stack *stack)
 {
     int i = 0;
-    int big;
-    big = -9999;
-    while (i <= stack->size)
-    {
-        if (big <= stack->stackB[i] && stack->stackB[i] != 0)
-            big = stack->stackB[i];
-        i++;
-    }
-    return (big);
+    i = stack->size;
+    while (stack->stackB[i] != 0)
+        i--;
+    return (i);
 }
 
 int find_new_size(t_stack *stack)
@@ -73,4 +68,14 @@ int find_new_size_b(t_stack *stack)
         i++;
     }
     return (count);
+}
+
+int find_botton(t_stack *stack)
+{
+    int i = 0;
+    while (stack->stackA[i])
+        i++;
+    while (stack->stackA[i] == 0)
+        i--;
+    return (i);
 }

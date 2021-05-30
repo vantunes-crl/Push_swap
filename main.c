@@ -59,30 +59,30 @@ int main(int argc, char **argv)
     // }
     if (argc == 4)
         organize_3(&stack);
-    else if (argc <= 101)
-    {
-        int middle;
-        while (find_new_size(&stack) > 3)
-        {
-            middle = midle_number(&stack);
-            organize_a(&stack, middle);
-        }
-        organize_3(&stack);
-        while (find_new_size_b(&stack) > 0)
-            organize_b(&stack);
-    }
     else
     {
         int middle;
         while (find_new_size(&stack) > 3)
         {
-            middle = middle_move(&stack);
+            if (argc - 1 <= 101)
+                middle = midle_number(&stack);
+            else
+                middle = middle_move(&stack);
             organize_a(&stack, middle);
         }
         organize_3(&stack);
         while (find_new_size_b(&stack) > 0)
             organize_b(&stack);
     }
+    // if (if_order(&stack))
+    // {
+    //    printf("ordened\n");
+    //    exit(0);
+    // }
+    // i = 0;
+    // while (i < stack.size)
+    //    printf("%d ",stack.stackA[i++]);
+    
     write(1,stack.cmd, ft_strlen(stack.cmd));
     free(stack.cmd);
     free(stack.stackA);
