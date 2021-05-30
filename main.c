@@ -1,34 +1,5 @@
 #include "push_swap.h"
 
-int if_order(t_stack *stack)
-{
-    int i = 0;
-    while (i < stack->size - 1)
-    {
-        if (stack->stackA[i] > stack->stackA[i + 1])
-            return (0);
-        i++;
-    }
-    return (1);
-}
-
-int check_doble(t_stack *stack)
-{
-    int *array;
-    array = malloc(sizeof(int *) * stack->size);
-    memcpy(array , stack->stackA, sizeof(int *) * find_new_size(stack));
-    ft_sort(stack->size, array);
-    int i = 0;
-    while (i < stack->size -1)
-    {
-        if (array[i] == array[i + 1])
-            return (1);
-        i++;
-    }
-    free(array);
-    return (0);
-}
-
 int main(int argc, char **argv)
 {   
     t_stack stack;
@@ -39,12 +10,14 @@ int main(int argc, char **argv)
     stack.cmd = "";
     stack.chunk = 0;
     stack.size = argc - 1;
-    stack.stackA = calloc(stack.size, sizeof(int *));
-    stack.stackB = calloc(stack.size, sizeof(int *));
+    stack.stackA = ft_calloc(stack.size, sizeof(int *));
+    stack.stackB = ft_calloc(stack.size, sizeof(int *));
     i = -1;
     while (++i < stack.size)
     {
         stack.stackA[i] = atoi(argv[j]);
+        if (atoi(argv[j]) == 0)
+            stack.stackA[i] = -1;
         j++;
     }
     // if (if_order(&stack))

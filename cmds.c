@@ -18,13 +18,6 @@ void sb(t_stack *stack) //swap the top two numbers in a stack B
     stack->cmd = ft_strjoin(stack->cmd, "sb\n");
 }
 
-void ss(t_stack *stack) //swap the top two numbers in a stack A and B
-{
-    sa(stack);
-    sb(stack);
-    stack->cmd = ft_strjoin(stack->cmd, "ss\n");
-}
-
 void rra(t_stack *stack) //swap the botton to the top stack A
 {
     int botton = find_botton(stack);
@@ -57,7 +50,6 @@ void ra(t_stack *stack) // swap the top to the botton stack A
 void rb(t_stack *stack) // swap the botton to the top stack B
 {
     int top = stack->stackB[find_top_b(stack) + 1];
-    int botton = stack->stackB[stack->size];
     int i = find_top_b(stack) + 1;
     while (i <= stack->size)
     {

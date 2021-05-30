@@ -19,14 +19,25 @@ void ft_sort(int size, int *array)
 
 int middle_move(t_stack *stack)
 {
-    int i = 0;
     int *array;
     int middle;
-    array = malloc(sizeof(int *) * stack->size);
-    memcpy(array , stack->stackA, sizeof(int *) * stack->size);
+    array = ft_calloc(stack->size, sizeof(int));
+    ft_memcpy(array , stack->stackA, sizeof(int) * stack->size);
     ft_sort(stack->size, array);
     stack->chunk = stack->chunk + (stack->size / 10);
     middle = array[stack->chunk];
+    free(array);
+    return (middle);
+}
+
+int midle_number(t_stack *stack)
+{
+    int *array;
+    array = ft_calloc(find_new_size(stack), sizeof(int));
+    ft_memcpy(array , stack->stackA, sizeof(int) * find_new_size(stack));
+    ft_sort(find_new_size(stack), array);
+    int middle = find_new_size(stack) / 2;
+    middle = array[middle];
     free(array);
     return (middle);
 }
