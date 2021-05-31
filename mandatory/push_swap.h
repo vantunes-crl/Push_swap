@@ -52,6 +52,8 @@ void	*ft_calloc(size_t count, size_t size);
 int     ft_atoi(const char *str);
 int     ft_strnstr(const char *s1, const char *s2, size_t len);
 int     ft_isdigit(int c);
+int     ft_lenofnum_bonus(int n);
+char    *ft_itoa(int n);
 
 /* check_errors */
 int if_order(t_stack *stack);
