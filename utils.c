@@ -50,33 +50,6 @@ void	*ft_calloc(size_t count, size_t size)
 	return ((void *)mem);
 }
 
-int midle_number(t_stack *stack)
-{
-    int *array;
-    array = ft_calloc(find_new_size(stack), sizeof(int *));
-    ft_memcpy(array , stack->stackA, sizeof(int *) * find_new_size(stack));
-    ft_sort(find_new_size(stack), array);
-    int middle = find_new_size(stack) / 2;
-    middle = array[middle];
-    free(array);
-    return (middle);
-}
-
-int has_less(t_stack *stack, int middle)
-{
-    int i = 0;
-    while (i < stack->size)
-    {
-        if (stack->stackA[i] < middle && stack->stackA[i] != 0)
-        {
-            stack->pos = i;
-            return (1);
-        }
-        i++;
-    }
-    return (0);
-}
-
 void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
 	int			i;

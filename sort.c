@@ -21,11 +21,41 @@ int middle_move(t_stack *stack)
 {
     int *array;
     int middle;
-    array = ft_calloc(stack->size, sizeof(int *));
-    ft_memcpy(array , stack->stackA, sizeof(int *) * stack->size);
+    array = ft_calloc(stack->size, sizeof(int));
+    ft_memcpy(array , stack->stackA, sizeof(int) * stack->size);
     ft_sort(stack->size, array);
     stack->chunk = stack->chunk + (stack->size / 10);
     middle = array[stack->chunk];
     free(array);
     return (middle);
+}
+
+int midle_number(t_stack *stack)
+{
+    int *array;
+    int middle;
+
+    array = ft_calloc(find_new_size(stack), sizeof(int));
+    ft_memcpy(array , stack->stackA, sizeof(int) * find_new_size(stack));
+    ft_sort(find_new_size(stack), array);
+    middle = find_new_size(stack) / 2;
+    middle = array[middle];
+    if (!array)
+        free(array);
+    return (middle);
+}
+
+int has_less(t_stack *stack, int middle)
+{
+    int i = 0;
+    while (i < stack->size)
+    {
+        if (stack->stackA[i] < middle && stack->stackA[i] != 0)
+        {
+            stack->pos = i;
+            return (1);
+        }
+        i++;
+    }
+    return (0);
 }

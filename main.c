@@ -5,13 +5,12 @@ int main(int argc, char **argv)
     t_stack stack;
     int i = 0;
     int j = 1;
-    stack.cont_move = 0;
     stack.pos = 0;
     stack.cmd = "";
     stack.chunk = 0;
     stack.size = argc - 1;
-    stack.stackA = ft_calloc(stack.size, sizeof(int *));
-    stack.stackB = ft_calloc(stack.size, sizeof(int *));
+    stack.stackA = ft_calloc(stack.size + 1, sizeof(int));
+    stack.stackB = ft_calloc(stack.size + 1, sizeof(int));
     i = -1;
     while (++i < stack.size)
     {
@@ -37,7 +36,7 @@ int main(int argc, char **argv)
         int middle;
         while (find_new_size(&stack) > 3)
         {
-            if (argc - 1 <= 101)
+            if (argc - 1 <= 100)
                 middle = midle_number(&stack);
             else
                 middle = middle_move(&stack);
