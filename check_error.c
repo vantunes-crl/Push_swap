@@ -16,7 +16,7 @@ int check_doble(t_stack *stack)
 {
     int *array;
     array = malloc(sizeof(int) * stack->size);
-    ft_memcpy(array , stack->stackA, sizeof(int) * find_new_size(stack));
+    memcpy(array , stack->stackA, sizeof(int) * find_new_size(stack));
     ft_sort(stack->size, array);
     int i = 0;
     while (i < stack->size -1)
