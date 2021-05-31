@@ -1,5 +1,6 @@
 #include "push_swap.h"
 
+
 int main(int argc, char **argv)
 {   
     t_stack stack;
@@ -9,6 +10,10 @@ int main(int argc, char **argv)
     stack.cmd = "";
     stack.chunk = 0;
     stack.size = argc - 1;
+    if (check_double(argv))
+        exit(0);
+    if (check_caracters(argv))
+        exit(0);
     stack.stackA = ft_calloc(stack.size + 1, sizeof(int));
     stack.stackB = ft_calloc(stack.size + 1, sizeof(int));
     i = -1;
@@ -20,8 +25,6 @@ int main(int argc, char **argv)
         j++;
     }
     if (if_order(&stack))
-        exit(0);
-    if (check_doble(&stack))
         exit(0);
     if (argc == 4)
         organize_3(&stack);

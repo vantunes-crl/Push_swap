@@ -50,9 +50,12 @@ int     ft_strlen(const char *str);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
 void	*ft_calloc(size_t count, size_t size);
 int     ft_atoi(const char *str);
+int     ft_strnstr(const char *s1, const char *s2, size_t len);
+int     ft_isdigit(int c);
 
 /* check_errors */
 int if_order(t_stack *stack);
-int check_doble(t_stack *stack);
+int check_double(char **argv);
+int check_caracters(char **argv);
 
 #endif

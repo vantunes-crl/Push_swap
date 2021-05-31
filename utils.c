@@ -1,4 +1,5 @@
 #include "push_swap.h"
+#include <stdio.h>
 
 int ft_strlen(const char *str)
 {
@@ -91,4 +92,34 @@ int	ft_atoi(const char *str)
 		i++;
 	}
 	return (n * neg);
+}
+
+int ft_strnstr(const char *s1, const char *s2, size_t len)
+{
+	size_t i;
+	size_t j;
+
+	i = 0;
+	while (s1[i] && i < len)
+	{
+		j = 0;
+		if (s1[i] == s2[j])
+		{
+			while (s1[i + j] == s2[j] && (j + i) < len)
+			{
+				if (s2[j + 1] == '\0')
+					return (1);
+				j++;
+			}
+		}
+		i++;
+	}
+	return (0);
+}
+
+int	ft_isdigit(int c)
+{
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
 }

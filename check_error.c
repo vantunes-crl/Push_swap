@@ -14,26 +14,51 @@ int if_order(t_stack *stack)
     return (1);
 }
 
-int check_doble(t_stack *stack)
+int check_double(char **argv)
 {
-    int *array;
+    int i;
+    int j;
 
-    array = malloc(sizeof(int) * stack->size);
-    ft_memcpy(array , stack->stackA, sizeof(int) * find_new_size(stack));
-    ft_sort(stack->size, array);
-    int i = 0;
-    while (i < stack->size -1)
+    i = 1;
+    while (argv[i])
     {
-        if (array[i] == array[i + 1])
+        j = i + 1;
+        while (argv[j])
         {
-            free(array);
-            free(stack->stackB);
-            free(stack->stackA);
-            write(1, "Error\n", 6);
-            return (1);
+            if (ft_strlen(argv[i]) == ft_strlen(argv[j]))
+            {
+                if (ft_strnstr(argv[i], argv[j], ft_strlen(argv[i])))
+                {
+                    write(1,"Error\n", 6);
+                    return (1);
+                }
+            }
+            j++;
         }
         i++;
     }
-    free(array);
+    return (0);
+}
+
+int check_caracters(char **argv)
+{
+    int i;
+    int j;
+
+    i = 1;
+    while (argv[i])
+    {
+        j = 0;
+        while (argv[i][j])
+        {
+            if (!ft_isdigit(argv[i][j]))
+            {
+                write(1, "Error\n", 6);
+                return (1);
+            }
+            j++;
+        }
+    i++;
+    }
     return (0);
 }
