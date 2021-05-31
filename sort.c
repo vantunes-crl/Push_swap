@@ -21,8 +21,8 @@ int middle_move(t_stack *stack)
 {
     int *array;
     int middle;
-    array = malloc(sizeof(int *) * stack->size);
-    memcpy(array , stack->stackA, sizeof(int *) * stack->size);
+    array = ft_calloc(stack->size, sizeof(int *));
+    ft_memcpy(array , stack->stackA, sizeof(int *) * stack->size);
     ft_sort(stack->size, array);
     stack->chunk = stack->chunk + (stack->size / 10);
     middle = array[stack->chunk];

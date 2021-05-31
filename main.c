@@ -10,12 +10,14 @@ int main(int argc, char **argv)
     stack.cmd = "";
     stack.chunk = 0;
     stack.size = argc - 1;
-    stack.stackA = calloc(stack.size, sizeof(int *));
-    stack.stackB = calloc(stack.size, sizeof(int *));
+    stack.stackA = ft_calloc(stack.size, sizeof(int *));
+    stack.stackB = ft_calloc(stack.size, sizeof(int *));
     i = -1;
     while (++i < stack.size)
     {
-        stack.stackA[i] = atoi(argv[j]);
+        stack.stackA[i] = ft_atoi(argv[j]);
+        if (ft_atoi(argv[j]) == 0)
+            stack.stackA[i] = -1;
         j++;
     }
     // if (if_order(&stack))
@@ -53,7 +55,6 @@ int main(int argc, char **argv)
     // i = 0;
     // while (i < stack.size)
     //    printf("%d ",stack.stackA[i++]);
-    
     write(1,stack.cmd, ft_strlen(stack.cmd));
     free(stack.cmd);
     free(stack.stackA);

@@ -33,11 +33,28 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (news);
 }
 
+void	*ft_calloc(size_t count, size_t size)
+{
+	char	*mem;
+	size_t	i;
+
+	i = 0;
+	mem = (char *)malloc(count * size);
+	if (mem == 0)
+		return (0);
+	while (i < count * size)
+	{
+		mem[i] = 0;
+		i++;
+	}
+	return ((void *)mem);
+}
+
 int midle_number(t_stack *stack)
 {
     int *array;
-    array = malloc(sizeof(int *) * find_new_size(stack));
-    memcpy(array , stack->stackA, sizeof(int *) * find_new_size(stack));
+    array = ft_calloc(find_new_size(stack), sizeof(int *));
+    ft_memcpy(array , stack->stackA, sizeof(int *) * find_new_size(stack));
     ft_sort(find_new_size(stack), array);
     int middle = find_new_size(stack) / 2;
     middle = array[middle];
@@ -58,4 +75,47 @@ int has_less(t_stack *stack, int middle)
         i++;
     }
     return (0);
+}
+
+void	*ft_memcpy(void *dest, const void *src, size_t n)
+{
+	int			i;
+	char		*d;
+	const char	*s;
+
+	i = 0;
+	d = dest;
+	s = src;
+	if (dest == src)
+		return (0);
+	while (n > 0)
+	{
+		d[i] = s[i];
+		i++;
+		n--;
+	}
+	return (dest);
+}
+
+int	ft_atoi(const char *str)
+{
+	int neg;
+	int i;
+	int n;
+
+	i = 0;
+	neg = 1;
+	n = 0;
+	if (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i] == '-')
+			neg *= -1;
+		i++;
+	}
+	while (str[i] >= 48 && str[i] <= 57)
+	{
+		n = n * 10 + (str[i] - 48);
+		i++;
+	}
+	return (n * neg);
 }
