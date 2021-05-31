@@ -1,39 +1,6 @@
 #include "push_swap.h"
 #include <stdio.h>
 
-int ft_strlen(const char *str)
-{
-    int i;
-    i = 0;
-    while (str[i])
-        i++;
-    return(i);
-}
-
-char	*ft_strjoin(char const *s1, char const *s2)
-{
-	char	*news;
-	int		i;
-	int		j;
-
-	i = 0;
-	j = 0;
-	news = (char *)malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
-	while (s1[i] != '\0')
-	{
-		news[i] = s1[i];
-		i++;
-	}
-	while (s2[j] != '\0')
-	{
-		news[i] = s2[j];
-		j++;
-		i++;
-	}
-	news[i] = '\0';
-	return (news);
-}
-
 void	*ft_calloc(size_t count, size_t size)
 {
 	char	*mem;
@@ -73,9 +40,9 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 
 int	ft_atoi(const char *str)
 {
-	int neg;
-	int i;
-	int n;
+	int	neg;
+	int	i;
+	int	n;
 
 	i = 0;
 	neg = 1;
@@ -94,10 +61,10 @@ int	ft_atoi(const char *str)
 	return (n * neg);
 }
 
-int ft_strnstr(const char *s1, const char *s2, size_t len)
+int	ft_strnstr(const char *s1, const char *s2, size_t len)
 {
-	size_t i;
-	size_t j;
+	size_t	i;
+	size_t	j;
 
 	i = 0;
 	while (s1[i] && i < len)

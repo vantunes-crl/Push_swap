@@ -1,6 +1,5 @@
 #include "get_next_line.h"
 #include "../mandatory/push_swap.h"
-#include <stdio.h>
 
 void	use_cmds(t_stack *stack, char *line)
 {
@@ -55,6 +54,16 @@ int	main(int argc, char **argv)
 	while (get_next_line(STDIN_FILENO, &line))
 	{
 		use_cmds(&stack, line);
+		if (line[0] == 'r' && line[1] == 'r' && line[2] == 'r')
+		{
+			rrb(&stack);
+			rra(&stack);
+		}
+		if (line[0] == 's' && line[1] == 's' && line[2] == '\0')
+		{
+			rrb(&stack);
+			rra(&stack);
+		}
 	}
 	if (if_order(&stack))
 		write(1, "\033[1;32m[OK]\n", 15);
