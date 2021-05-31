@@ -7,11 +7,11 @@ SRCS = cmds.c cmds2.c main.c sort.c organize.c finds.c utils.c check_error.c
 OBJS = $(SRCS:.c=.o)
 
 $(NAME) : $(OBJS)
-	gcc $(OBJS) $(FLAGS) -o $(NAME)
+	gcc $(OBJS) $(FLAGS) -o $(NAME) 
 
 all: $(NAME)
 
-clean: 
+clean:
 	rm -rf $(OBJS)
 
 fclean: 
