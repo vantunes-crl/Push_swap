@@ -52,10 +52,3 @@ int	main(int argc, char **argv)
 	free(stack.stackA);
 	free(stack.stackB);
 }
-
-void after_main() __attribute__((destructor));
-
-void after_main() {
-	while (1)
-		;
-}

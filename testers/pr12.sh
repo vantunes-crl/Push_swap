@@ -1,1 +1,1 @@
-./push_swap 2 3 4 13 10 12 | ./checker 2 3 4 13 10 12
+./push_swap 2 3 4 13 10 12 11
