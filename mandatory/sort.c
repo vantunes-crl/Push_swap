@@ -43,8 +43,7 @@ int	midle_number(t_stack *stack)
 	ft_sort(find_new_size(stack), array);
 	middle = find_new_size(stack) / 2;
 	middle = array[middle];
-	if (!array)
-		free(array);
+	free(array);
 	return (middle);
 }
 
