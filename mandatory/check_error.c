@@ -1,5 +1,4 @@
 #include "push_swap.h"
-#include <stdio.h>
 
 int	if_order(t_stack *stack)
 {
