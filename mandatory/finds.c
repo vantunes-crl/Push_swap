@@ -6,7 +6,7 @@ int	find_big(t_stack *stack)
 	int	big;
 
 	i = 0;
-	big = -9999;
+	big = -2147483647;
 	while (i <= stack->size)
 	{
 		if (big <= stack->stackB[i] && stack->stackB[i] != 0)

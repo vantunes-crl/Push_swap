@@ -1,4 +1,5 @@
 #include "push_swap.h"
+#include <stdio.h>
 
 int	if_order(t_stack *stack)
 {
@@ -53,7 +54,7 @@ int	check_caracters(char **argv)
 		j = 0;
 		while (argv[i][j])
 		{
-			if (!ft_isdigit(argv[i][j]))
+			if (!ft_isdigit(argv[i][j]) && argv[i][j] != '-')
 			{
 				write(1, "Error\n", 6);
 				return (1);

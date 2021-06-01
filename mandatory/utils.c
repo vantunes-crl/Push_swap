@@ -38,11 +38,17 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	return (dest);
 }
 
+int	error(void)
+{
+	write(1, "Error\n", 6);
+	exit(0);
+}
+
 int	ft_atoi(const char *str)
 {
-	int	neg;
-	int	i;
-	int	n;
+	int			neg;
+	int			i;
+	long int	n;
 
 	i = 0;
 	neg = 1;
@@ -58,7 +64,11 @@ int	ft_atoi(const char *str)
 		n = n * 10 + (str[i] - 48);
 		i++;
 	}
-	return (n * neg);
+	if (n > 2147483647)
+		error();
+	else if (n < -2147483648)
+		error();
+	return ((int)n * neg);
 }
 
 int	ft_strnstr(const char *s1, const char *s2, size_t len)
@@ -81,12 +91,5 @@ int	ft_strnstr(const char *s1, const char *s2, size_t len)
 		}
 		i++;
 	}
-	return (0);
-}
-
-int	ft_isdigit(int c)
-{
-	if (c >= '0' && c <= '9')
-		return (1);
 	return (0);
 }
