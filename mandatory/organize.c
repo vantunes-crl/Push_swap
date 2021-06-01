@@ -10,21 +10,21 @@ void	organize_3(t_stack *stack)
 	top = stack->stackA[0];
 	middle = stack->stackA[1];
 	if (top > middle && middle < botton && botton > top)
-		sa(stack);
+		sa(stack, 1);
 	else if (top > middle && middle > botton && botton < top)
 	{
-		sa(stack);
-		rra(stack);
+		sa(stack, 1);
+		rra(stack, 1);
 	}
 	else if (top > middle && middle < botton && botton < top)
-		ra(stack);
+		ra(stack, 1);
 	else if (top < middle && middle > botton && botton > top)
 	{
-		sa(stack);
-		ra(stack);
+		sa(stack, 1);
+		ra(stack, 1);
 	}
 	else if (top < middle && middle > botton && botton < top)
-		rra(stack);
+		rra(stack, 1);
 }
 
 void	organize_a(t_stack *stack, int middle)
@@ -32,19 +32,19 @@ void	organize_a(t_stack *stack, int middle)
 	int	size;
 
 	while (stack->stackA[0] < middle)
-		pb(stack);
+		pb(stack, 1);
 	size = find_new_size(stack);
 	has_less(stack, middle);
 	while (has_less(stack, middle))
 	{
 		while (stack->stackA[0] < middle)
-			pb(stack);
+			pb(stack, 1);
 		if (stack->pos > size / 2)
-			rra(stack);
+			rra(stack, 1);
 		else
-			ra(stack);
+			ra(stack, 1);
 		while (stack->stackA[0] < middle)
-			pb(stack);
+			pb(stack, 1);
 	}
 }
 
@@ -55,7 +55,7 @@ void	organize_b(t_stack *stack)
 
 	if (stack->stackB[find_top_b(stack) + 2] == stack->stackB[find_big(stack)]
 		&& find_new_size_b(stack) > 3)
-		sb(stack);
+		sb(stack, 1);
 	new_size = find_new_size_b(stack);
 	new_size = new_size / 2;
 	distance = (find_big(stack) - find_top_b(stack));
@@ -63,9 +63,9 @@ void	organize_b(t_stack *stack)
 		!= stack->stackB[find_big(stack)])
 	{
 		if (distance > new_size)
-			rrb(stack);
+			rrb(stack, 1);
 		else
-			rb(stack);
+			rb(stack, 1);
 	}
-	pa(stack);
+	pa(stack, 1);
 }

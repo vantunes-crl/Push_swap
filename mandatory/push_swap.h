@@ -11,21 +11,20 @@ typedef struct s_stack
 	int		size;
 	int		pos;
 	int		chunk;
-	char	*cmd;
 }			t_stack;
 
 /* comand functions */
-void	sa(t_stack *stackA);
-void	sb(t_stack *stackB);
-void	ss(t_stack *stackA);
-void	ra(t_stack *stackA);
-void	rb(t_stack *stackB);
-void	rr(t_stack *stackA);
-void	rra(t_stack *stackA);
-void	rrb(t_stack *stackB);
-void	rrr(t_stack *stackA);
-void	pb(t_stack *stack);
-void	pa(t_stack *stack);
+void	sa(t_stack *stackA, int print);
+void	sb(t_stack *stackB, int print);
+void	ss(t_stack *stackA, int print);
+void	ra(t_stack *stackA, int print);
+void	rb(t_stack *stackB, int print);
+void	rr(t_stack *stackA, int print);
+void	rra(t_stack *stackA, int print);
+void	rrb(t_stack *stackB, int print);
+void	rrr(t_stack *stackA, int print);
+void	pb(t_stack *stack, int print);
+void	pa(t_stack *stack, int print);
 
 /* organize functions */
 void	organize_3(t_stack *stack);

@@ -7,7 +7,6 @@ void	init(t_stack *stack, char **argv, int argc)
 
 	j = 1;
 	stack->pos = 0;
-	stack->cmd = "";
 	stack->chunk = 0;
 	stack->size = argc - 1;
 	if (check_double(argv))
@@ -40,7 +39,7 @@ int	main(int argc, char **argv)
 	{
 		while (find_new_size(&stack) > 3)
 		{
-			if (argc - 1 <= 100)
+			if (argc - 1 <= 101)
 				middle = midle_number(&stack);
 			else
 				middle = middle_move(&stack);
@@ -50,8 +49,6 @@ int	main(int argc, char **argv)
 		while (find_new_size_b(&stack) > 0)
 			organize_b(&stack);
 	}
-	write(1, stack.cmd, ft_strlen(stack.cmd));
-	free(stack.cmd);
 	free(stack.stackA);
 	free(stack.stackB);
 }

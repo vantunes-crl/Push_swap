@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-void	sa(t_stack *stack)
+void	sa(t_stack *stack, int print)
 {
 	int	temp;
 
@@ -9,20 +9,22 @@ void	sa(t_stack *stack)
 		return ;
 	stack->stackA[0] = stack->stackA[1];
 	stack->stackA[1] = temp;
-	stack->cmd = ft_strjoin(stack->cmd, "sa\n");
+	if (print == 1)
+		write(1, "sa\n", 3);
 }
 
-void	sb(t_stack *stack)
+void	sb(t_stack *stack, int print)
 {
 	int	temp;
 
 	temp = stack->stackB[find_top_b(stack) + 1];
 	stack->stackB[find_top_b(stack) + 1] = stack->stackB[find_top_b(stack) + 2];
 	stack->stackB[find_top_b(stack) + 2] = temp;
-	stack->cmd = ft_strjoin(stack->cmd, "sb\n");
+	if (print == 1)
+		write(1, "sb\n", 3);
 }
 
-void	pb(t_stack *stack)
+void	pb(t_stack *stack, int print)
 {
 	int	save;
 	int	i;
@@ -37,10 +39,11 @@ void	pb(t_stack *stack)
 		i++;
 	}
 	stack->stackB[find_top_b(stack)] = save;
-	stack->cmd = ft_strjoin(stack->cmd, "pb\n");
+	if (print == 1)
+		write(1, "pb\n", 3);
 }
 
-void	pa(t_stack *stack)
+void	pa(t_stack *stack, int print)
 {
 	int	save;
 	int	i;
@@ -56,7 +59,8 @@ void	pa(t_stack *stack)
 		i--;
 	}
 	stack->stackA[i] = save;
-	stack->cmd = ft_strjoin(stack->cmd, "pa\n");
+	if (print == 1)
+		write(1, "pa\n", 3);
 }
 
 int	find_botton(t_stack *stack)

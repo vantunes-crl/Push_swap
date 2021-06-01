@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-void	rra(t_stack *stack)
+void	rra(t_stack *stack, int print)
 {
 	int	botton;
 	int	x;
@@ -15,10 +15,11 @@ void	rra(t_stack *stack)
 		i--;
 	}
 	stack->stackA[0] = x;
-	stack->cmd = ft_strjoin(stack->cmd, "rra\n");
+	if (print == 1)
+		write(1, "rra\n", 4);
 }
 
-void	rrb(t_stack *stack)
+void	rrb(t_stack *stack, int print)
 {
 	int	x;
 	int	i;
@@ -31,10 +32,11 @@ void	rrb(t_stack *stack)
 		i--;
 	}
 	stack->stackB[find_top_b(stack)] = x;
-	stack->cmd = ft_strjoin(stack->cmd, "rrb\n");
+	if (print == 1)
+		write(1, "rrb\n", 4);
 }
 
-void	ra(t_stack *stack)
+void	ra(t_stack *stack, int print)
 {
 	int	botton;
 	int	x;
@@ -49,10 +51,11 @@ void	ra(t_stack *stack)
 		i++;
 	}
 	stack->stackA[botton] = x;
-	stack->cmd = ft_strjoin(stack->cmd, "ra\n");
+	if (print == 1)
+		write(1, "ra\n", 3);
 }
 
-void	rb(t_stack *stack)
+void	rb(t_stack *stack, int print)
 {
 	int	top;
 	int	i;
@@ -67,5 +70,6 @@ void	rb(t_stack *stack)
 		i++;
 	}
 	stack->stackB[stack->size] = top;
-	stack->cmd = ft_strjoin(stack->cmd, "rb\n");
+	if (print == 1)
+		write(1, "rb\n", 3);
 }
