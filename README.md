@@ -31,3 +31,16 @@
  6. Then just look for the highest number in stackB and send it to stackA until stackB is empty.
  
  note: when sending to stackA for stackB or the inverse , always check if it is better to use rra or ra , rb or rrb , to pull the number to the top
+ 
+ ## Bonus
+
+bonus is for making a checker , which reads the commands and checks if those commands really organize the stack.
+
+    ./push_swap 5 3 4 6 7 | ./checker 5 3 4 6 7
+	output: OK
+	or
+	output: KO
+
+## install Push_swap and checker
+
+    make all
