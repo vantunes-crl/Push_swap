@@ -29,7 +29,7 @@
  4. Send everything less then this number to stack B.
  5. Do this , over and over until stackA is empty or with 3 elements.
  6. Then just look for the highest number in stackB and send it to stackA until stackB is empty.
- 
+ 7. with 500 random numbers divede by 10 once.
  note: when sending to stackA for stackB or the inverse , always check if it is better to use rra or ra , rb or rrb , to pull the number to the top
  
  ## Bonus
